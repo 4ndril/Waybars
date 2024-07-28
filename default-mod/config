@@ -1,0 +1,184 @@
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 3, // Gaps between modules (4px)
+    
+    // Choose the order of the modules
+    "modules-left": ["custom/appmenu", "hyprland/workspaces","hyprland/window"],
+    "modules-center": ["custom/notifications"],
+    "modules-right": ["tray", "custom/updates", "backlight", "pulseaudio","network", "battery", "clock", "custom/power"],
+    
+    // Modules configuration
+    // Load Modules
+    "include": ["~/dotfiles/waybar/modules.json"],
+
+    // Workspaces
+    "hyprland/workspaces" : {
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{}",
+        "format-icons": {
+            "urgent": "󰚽",
+            "active": "",
+            "default": ""
+        },
+        "persistent-workspaces": {
+            // START WORKSPACES
+"*": 1
+            // END WORKSPACES
+        }       
+    
+     },
+    "custom/power": {
+        "format": " ",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
+    "custom/appmenu": {
+        "format": "  ",
+        "on-click": "rofi -show drun -replace",
+        "on-click-right": "~/dotfiles/hypr/scripts/keybindings.sh",
+        "tooltip": false
+    },
+    "custom/updates": {
+        "format": "<span foreground='red'><sup></sup></span> {}",
+        "none": "",
+        "tooltip-format": "{}",
+        "escape": true,
+        "return-type": "json",       
+        "exec": "~/dotfiles/scripts/updates.sh",
+        "restart-interval": 60,
+        "on-click": "alacritty -e ~/dotfiles/scripts/installupdates.sh",
+        "on-click-right": "~/dotfiles/.settings/software.sh",
+        "tooltip": false
+    },
+    "clock": {
+        "format": "   {:%I:%M %p} ",
+        "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-alt": "{icon}  {time}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": [" ", " ", " ", " ", " "]
+    },
+    "backlight": {
+    "device": "nvidia_wmi_ec_backlight",
+    "format": "{icon}  {percent}%",
+    "format-icons": ["󰃚", "󰃛", "󰃜", "󰃜", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"],
+    "on-scroll-up": "light -A 1",
+    "on-scroll-down": "light -U 5"
+    },
+    "network": {
+            "format-wifi": "   {essid}",
+            "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+            "format-ethernet": "{ifname}  ",
+            "format-linked": "{ifname} ",
+            "format-disconnected": "󰖪 Disconnected",
+            "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", " ", " "]
+        },
+        "on-click": "pavucontrol"
+        }
+    },
+    "hyprland/window": {
+        "format": "󯤍 {}"
+     },
+    "tray": {
+        "icon-size": 22,
+        "spacing": 10
+    },
+    "mpris": {
+        "format": "{player_icon} <i>{title}</i>",
+        "format-paused": "{status_icon} {title}",
+        "player-icons": {
+            "default": "󪤷",
+            "mpv": "🎵"
+        },
+        "status-icons": {
+            "paused": "󪤶"
+    },
+     "custom/notifications": {
+        "tooltip": false,
+        "format": "{icon} {}",
+        "rotate": 0,
+        "format-icons": {
+            "email-notification": "<span foreground='white'><sup></sup></span>",
+            "chat-notification": "󱋊<span foreground='white'><sup></sup></span>",
+            "warning-notification": "󱨪<span foreground='yellow'><sup></sup></span>",
+            "error-notification": "󱨪<span foreground='red'><sup></sup></span>",
+            "network-notification": "󱂇<span foreground='white'><sup></sup></span>",
+            "battery-notification": "󰁺<span foreground='white'><sup></sup></span>",
+            "update-notification": "󰚰<span foreground='white'><sup></sup></span>",
+            "music-notification": "󰝚<span foreground='white'><sup></sup></span>",
+            "volume-notification": "󰕿<span foreground='white'><sup></sup></span>",
+            "notification": "<span foreground='white'><sup></sup></span>",
+            "none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which dunstctl",
+        "exec": "notifications.py",
+        "on-click": "sleep 0.1 && dunstctl history-pop",
+        "on-click-middle": "dunstctl history-clear",
+        "on-click-right": "dunstctl close-all",
+        "interval": 1,
+        "tooltip": true,
+        "escape": true
+    },
+    // Waybar Themes
+    "custom/waybarthemes": {
+        "format": "",
+        "on-click": "~/dotfiles/waybar/themeswitcher.sh",
+        "tooltip": false
+    },
+    // Settings
+    "custom/settings": {
+        "format": "",
+        "on-click": "alacritty --class dotfiles-floating -e ~/dotfiles/hypr/start-settings.sh",
+        "tooltip": false
+    },
+    }
+        
+}
