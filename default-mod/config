@@ -1,18 +1,19 @@
 {
+
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 3, // Gaps between modules (4px)
-    
+
     // Choose the order of the modules
     "modules-left": ["custom/appmenu", "hyprland/workspaces","hyprland/window"],
     "modules-center": ["custom/notifications"],
     "modules-right": ["tray", "custom/updates", "backlight", "pulseaudio","network", "battery", "clock", "custom/power"],
-    
+
     // Modules configuration
     // Load Modules
-    "include": ["~/dotfiles/waybar/modules.json"],
+    "include": ["~/dotfiles/.config/waybar/modules.json"],
 
     // Workspaces
     "hyprland/workspaces" : {
@@ -29,8 +30,8 @@
             // START WORKSPACES
 "*": 1
             // END WORKSPACES
-        }       
-    
+        }
+
      },
     "custom/power": {
         "format": " ",
@@ -48,7 +49,7 @@
         "none": "",
         "tooltip-format": "{}",
         "escape": true,
-        "return-type": "json",       
+        "return-type": "json",
         "exec": "~/dotfiles/scripts/updates.sh",
         "restart-interval": 60,
         "on-click": "alacritty -e ~/dotfiles/scripts/installupdates.sh",
@@ -180,5 +181,5 @@
         "tooltip": false
     },
     }
-        
+
 }
